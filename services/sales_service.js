@@ -1,9 +1,9 @@
 const salesRepository = require('../repository/sales_repository');
 
 const salesService = {
-    getSales: (start_date, end_date) => {
+    getSales: (start_date, end_date, branch_codes) => {
         return new Promise((resolve, reject) => {
-            salesRepository.getSales(start_date, end_date)
+            salesRepository.getSales(start_date, end_date, branch_codes)
             .then(result => {
                 resolve(result);
             }).catch(err => {

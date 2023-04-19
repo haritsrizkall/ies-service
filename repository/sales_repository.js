@@ -11,18 +11,18 @@ const salesRepository = {
         if (branch_codes) {
           request.input('branch_codes', branch_codes);
           request.query(
-            'SELECT * FROM [dbo].[tbTr_Penjualan_R] WHERE JLR_TGLTRN BETWEEN @start_date AND @end_date AND JLR_KODECABANG IN (@branch_codes) ORDER BY JLR_TGLTRN DESC',
+            'SELECT JLR_KODECABANG, JLR_TGLTRN, GDG_NAMA, SUM(JLR_SJLH_GROSS) as GROSS FROM [dbo].[tbTr_Penjualan_R] JOIN tbMaster_Cabang on tbMaster_Cabang.GDG_KODE = tbTr_Penjualan_R.JLR_KODECABANG WHERE JLR_TGLTRN BETWEEN @start_date AND @end_date AND JLR_KODECABANG IN (@branch_codes) GROUP BY JLR_KODECABANG, JLR_TGLTRN, GDG_NAMA ORDER BY JLR_TGLTRN DESC',
             (err, result) => {
               if (err) reject(err);
-              resolve(result);
+              resolve(result.recordset);
             }
           );
         } else {
           request.query(
-            'SELECT * FROM [dbo].[tbTr_Penjualan_R] WHERE JLR_TGLTRN BETWEEN @start_date AND @end_date ORDER BY JLR_TGLTRN DESC',
+            'SELECT JLR_KODECABANG, JLR_TGLTRN, GDG_NAMA, SUM(JLR_SJLH_GROSS) as GROSS FROM [dbo].[tbTr_Penjualan_R] JOIN tbMaster_Cabang on tbMaster_Cabang.GDG_KODE = tbTr_Penjualan_R.JLR_KODECABANG WHERE JLR_TGLTRN BETWEEN @start_date AND @end_date GROUP BY JLR_KODECABANG, JLR_TGLTRN, GDG_NAMA ORDER BY JLR_TGLTRN DESC',
             (err, result) => {
               if (err) reject(err);
-              resolve(result);
+              resolve(result.recordset);
             }
           );
         }

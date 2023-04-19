@@ -15,7 +15,9 @@ const salesController = {
                 abortEarly: false
             });
             const result = await salesRepository.getSales(value.start_date, value.end_date, value.branch_codes);
-            return res.status(200).json(result);
+            return res.status(200).json({
+                data: result
+            });
         }catch(err) {
             return res.status(500).json(err)
         }

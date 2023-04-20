@@ -1,6 +1,7 @@
 const express = require('express');
 const salesRouter = require('./routes/sales_route');
-const bankRouter = require('./routes/bank_route')
+const bankRouter = require('./routes/bank_route');
+const branchRouter = require('./routes/branch_route');
 
 const app = express();
 app.use(express.json());
@@ -12,6 +13,7 @@ app.get('/', (req, res) => {
 
 app.use('/sales', salesRouter);
 app.use('/banks', bankRouter);
+app.use('/branches', branchRouter);
 
 
 

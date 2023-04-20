@@ -14,7 +14,7 @@ const branchRepository = {
                     queryStr,
                     (err, result) =>{
                         if (err) reject(err)
-                        resolve(result)
+                        resolve(result.recordset)
                     }
                 )
             })

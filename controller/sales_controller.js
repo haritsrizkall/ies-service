@@ -3,7 +3,7 @@ const salesRepository = require('../repository/sales_repository')
 const getSalesSchema = Joi.object({
     start_date: Joi.date().required(),
     end_date: Joi.date().required(),
-    branch_codes: Joi.string()
+    branch_codes: Joi.string().regex(new RegExp("^\\d{4}(,\\d{4})*$"))
 });
 
 
